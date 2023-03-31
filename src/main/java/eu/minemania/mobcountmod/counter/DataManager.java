@@ -123,13 +123,13 @@ public class DataManager
             {
                 if (Configs.Generic.NOTIFYFACTION.getBooleanValue())
                 {
-                    MinecraftClient.getInstance().player.sendChatMessage("/ch qm f Automated Message: " + hostileCount + " mobz. Kill pl0x.");
+                    MinecraftClient.getInstance().player.sendCommand("ch qm f Automated Message: " + hostileCount + " mobz. Kill pl0x.");
                 }
                 if (Configs.Generic.MESSAGE_LIST.getStrings() != null && Configs.Generic.MESSAGE_LIST.getStrings().size() > 0)
                 {
                     for (String player : Configs.Generic.MESSAGE_LIST.getStrings())
                     {
-                        MinecraftClient.getInstance().player.sendChatMessage("/m " + player + " Automated Message: " + hostileCount + " mobz. Kill pl0x.");
+                        MinecraftClient.getInstance().player.sendCommand("m " + player + " Automated Message: " + hostileCount + " mobz. Kill pl0x.");
                     }
                 }
                 this.sendMsgCount++;

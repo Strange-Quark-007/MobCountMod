@@ -219,6 +219,10 @@ public class MobCountRenderer
         {
             this.addLinePassive(String.format("%s %s%s%s", StringUtils.translate("mcm.message.mobcounter.radius", DataManager.getCounter().getRadiusP()), getColor(totalPassive, true), StringUtils.translate("mcm.message.mobcounter.total", this.totalPassive), GuiBase.TXT_RST));
         }
+        else if (type == InfoTogglePassive.ALLAY)
+        {
+            this.addLinePassive(lineTextP(EntityType.ALLAY));
+        }
         else if (type == InfoTogglePassive.AXOLOTL)
         {
             this.addLinePassive(lineTextP(EntityType.AXOLOTL));
@@ -243,13 +247,13 @@ public class MobCountRenderer
         {
             this.addLinePassive(lineTextP(EntityType.COW));
         }
-        else if (type == InfoTogglePassive.DONKEY)
-        {
-            this.addLinePassive(lineTextP(EntityType.DONKEY));
-        }
         else if (type == InfoTogglePassive.DOLPHIN)
         {
             this.addLinePassive(lineTextP(EntityType.DOLPHIN));
+        }
+        else if (type == InfoTogglePassive.DONKEY)
+        {
+            this.addLinePassive(lineTextP(EntityType.DONKEY));
         }
         else if (type == InfoTogglePassive.FISH)
         {
@@ -258,6 +262,10 @@ public class MobCountRenderer
         else if (type == InfoTogglePassive.FOX)
         {
             this.addLinePassive(lineTextP(EntityType.FOX));
+        }
+        else if (type == InfoTogglePassive.FROG)
+        {
+            this.addLinePassive(lineTextP(EntityType.FROG));
         }
         else if (type == InfoTogglePassive.GLOWSQUID)
         {
@@ -334,6 +342,10 @@ public class MobCountRenderer
         else if (type == InfoTogglePassive.STRIDER)
         {
             this.addLinePassive(lineTextP(EntityType.STRIDER));
+        }
+        else if (type == InfoTogglePassive.TADPOLE)
+        {
+            this.addLinePassive(lineTextP(EntityType.TADPOLE));
         }
         else if (type == InfoTogglePassive.TRADER_LLAMA)
         {
@@ -474,6 +486,10 @@ public class MobCountRenderer
         else if (type == InfoToggleHostile.VINDICATOR)
         {
             this.addLineHostile(lineTextH(EntityType.VINDICATOR));
+        }
+        else if (type == InfoToggleHostile.WARDEN)
+        {
+            this.addLineHostile(lineTextH(EntityType.WARDEN));
         }
         else if (type == InfoToggleHostile.WITCH)
         {

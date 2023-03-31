@@ -42,6 +42,7 @@ public enum InfoToggleHostile implements IConfigInteger, IHotkeyTogglable
     STRAY("infoStray", true, 25, "", "strays"),
     VEX("infoVex", true, 12, "", "vexes"),
     VINDICATOR("infoVindicator", true, 26, "", "vindicators"),
+    WARDEN("infoWarden", true, 34, "", "wardens"),
     WITCH("infoWitch", true, 4, "", "witches"),
     WITHER("infoWither", true, 34, "", "withers"),
     WITHER_SKELETON("infoWitherSkeleton", true, 27, "", "wither skeletons"),
