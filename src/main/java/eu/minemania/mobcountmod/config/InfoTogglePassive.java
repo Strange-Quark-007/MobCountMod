@@ -19,6 +19,7 @@ public enum InfoTogglePassive implements IConfigInteger, IHotkeyTogglable
     AXOLOTL("infoAxolotl", true, 33, "", "axolotl"),
     BAT("infoBat", true, 10, "", "bats"),
     BEE("infoBee", true, 23, "", "bees"),
+    CAMEL("infoCamel", true, 39, "", "camels"),
     CAT("infoCat", true, 11, "", "cats"),
     CHICKEN("infoChicken", true, 1, "", "chickens"),
     COW("infoCow", true, 4, "", "cows"),
@@ -166,7 +167,7 @@ public enum InfoTogglePassive implements IConfigInteger, IHotkeyTogglable
     @Override
     public boolean isModified(String newValue)
     {
-        return String.valueOf(this.defaultValueBoolean).equals(newValue) == false;
+        return !String.valueOf(this.defaultValueBoolean).equals(newValue);
     }
 
     @Override

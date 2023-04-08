@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.1+1.19.3] - 2023-04-08
+
+### Added
+
+- Support Minecraft 1.19.3
+- Added Camel support
+
 ## [1.9.0+1.19.2] - 2023-04-02
 
 ### Added

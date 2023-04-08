@@ -19,11 +19,11 @@ import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 
 public class DataManager
 {
-    private static DataManager INSTANCE = new DataManager();
+    private static final DataManager INSTANCE = new DataManager();
     private static boolean canSave;
 
     private final MobCounter counter = new MobCounter();
@@ -107,7 +107,7 @@ public class DataManager
         {
             if (this.playSoundCount == 0)
             {
-                SoundEvent soundEvent = Registry.SOUND_EVENT.get(new Identifier(Configs.Generic.SOUNDFILE.getStringValue()));
+                SoundEvent soundEvent = Registries.SOUND_EVENT.get(new Identifier(Configs.Generic.SOUNDFILE.getStringValue()));
                 if (soundEvent != null)
                 {
                     SoundInstance sound = PositionedSoundInstance.master(soundEvent, 1.0F);
@@ -123,13 +123,13 @@ public class DataManager
             {
                 if (Configs.Generic.NOTIFYFACTION.getBooleanValue())
                 {
-                    MinecraftClient.getInstance().player.sendCommand("ch qm f Automated Message: " + hostileCount + " mobz. Kill pl0x.");
+                    MinecraftClient.getInstance().player.networkHandler.sendChatCommand("ch qm f Automated Message: " + hostileCount + " mobz. Kill pl0x.");
                 }
                 if (Configs.Generic.MESSAGE_LIST.getStrings() != null && Configs.Generic.MESSAGE_LIST.getStrings().size() > 0)
                 {
                     for (String player : Configs.Generic.MESSAGE_LIST.getStrings())
                     {
-                        MinecraftClient.getInstance().player.sendCommand("m " + player + " Automated Message: " + hostileCount + " mobz. Kill pl0x.");
+                        MinecraftClient.getInstance().player.networkHandler.sendChatCommand("m " + player + " Automated Message: " + hostileCount + " mobz. Kill pl0x.");
                     }
                 }
                 this.sendMsgCount++;
@@ -158,7 +158,7 @@ public class DataManager
                 {
                     configGuiTab = ConfigGuiTab.valueOf(root.get("config_gui_tab").getAsString());
                 }
-                catch (Exception e)
+                catch (Exception ignored)
                 {
                 }
 
@@ -179,7 +179,7 @@ public class DataManager
 
     public static void save(boolean forceSave)
     {
-        if (canSave == false && forceSave == false)
+        if (!canSave && !forceSave)
         {
             return;
         }
@@ -198,7 +198,7 @@ public class DataManager
     {
         File dir = getCurrentConfigDirectory();
 
-        if (dir.exists() == false && dir.mkdirs() == false)
+        if (!dir.exists() && !dir.mkdirs())
         {
             MobCountMod.logger.warn("Failed to create the config directory '{}'", dir.getAbsolutePath());
         }
