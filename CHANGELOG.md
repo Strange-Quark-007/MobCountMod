@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.2+1.19.3] - 2023-04-09
+
+### Fixes
+
+- Add rendering for camel
+
 ## [1.9.1+1.19.3] - 2023-04-08
 
 ### Added

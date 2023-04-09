@@ -235,6 +235,10 @@ public class MobCountRenderer
         {
             this.addLinePassive(lineTextP(EntityType.BEE));
         }
+        else if (type == InfoTogglePassive.CAMEL)
+        {
+            this.addLinePassive(lineTextP(EntityType.CAMEL));
+        }
         else if (type == InfoTogglePassive.CAT)
         {
             this.addLinePassive(lineTextP(EntityType.CAT));
