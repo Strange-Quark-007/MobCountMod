@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.3+1.19.4] - 2023-04-15
+
+### Added
+
+- Support Minecraft 1.19.4
+- Added Sniffer support
+
 ## [1.9.2+1.19.3] - 2023-04-09
 
 ### Fixes

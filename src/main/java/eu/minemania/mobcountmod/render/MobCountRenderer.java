@@ -335,6 +335,10 @@ public class MobCountRenderer
         {
             this.addLinePassive(lineTextP(EntityType.SKELETON_HORSE));
         }
+        else if (type == InfoTogglePassive.SNIFFER)
+        {
+            this.addLinePassive(lineTextP(EntityType.SNIFFER));
+        }
         else if (type == InfoTogglePassive.SNOW_GOLEM)
         {
             this.addLinePassive(lineTextP(EntityType.SNOW_GOLEM));

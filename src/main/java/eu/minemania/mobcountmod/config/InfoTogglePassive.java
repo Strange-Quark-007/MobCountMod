@@ -44,6 +44,7 @@ public enum InfoTogglePassive implements IConfigInteger, IHotkeyTogglable
     RABBIT("infoRabbit", true, 6, "", "rabbits"),
     SHEEP("infoSheep", true, 3, "", "sheep"),
     SKELETON_HORSE("infoSkeletonHorse", true, 28, "", "skeleton horses"),
+    SNIFFER("infoSniffer", true, 40, "", "sniffers"),
     SNOW_GOLEM("infoSnowGolem", true, 13, "", "snow golems"),
     SQUID("infoSquid", true, 21, "", "squids"),
     STRIDER("infoStrider", true, 32, "", "Striders"),
