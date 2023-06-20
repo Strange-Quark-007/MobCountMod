@@ -13,7 +13,7 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.FishEntity;
@@ -35,17 +35,17 @@ public class MobCountRenderer
         return INSTANCE;
     }
 
-    public static void renderOverlays(MatrixStack matrixStack)
+    public static void renderOverlays(DrawContext drawContext)
     {
         MinecraftClient mc = MinecraftClient.getInstance();
         DataManager.getInstance().hostileLimit(getInstance().totalHostile);
         if (mc.currentScreen == null && MinecraftClient.isHudEnabled())
         {
-            getInstance().renderHUD(matrixStack);
+            getInstance().renderHUD(drawContext);
         }
     }
 
-    public void renderHUD(MatrixStack matrixStack)
+    public void renderHUD(DrawContext drawContext)
     {
         long currentTime = System.currentTimeMillis();
         HudAlignment hudAlignment = (HudAlignment) Configs.Generic.HUD_ALIGNMENT.getOptionListValue();
@@ -74,13 +74,13 @@ public class MobCountRenderer
             {
                 xOff = -125;
             }
-            RenderUtils.renderText(xOff, yOff, 1, colorFg, colorBg, hudAlignment, customBg, true, this.linesPassive, matrixStack);
+            RenderUtils.renderText(xOff, yOff, 1, colorFg, colorBg, hudAlignment, customBg, true, this.linesPassive, drawContext);
         }
 
         if (DataManager.visibleHostile() == 1)
         {
             DataManager.getCounter().updateBBH();
-            RenderUtils.renderText(125, yOff, 1, colorFg, colorBg, hudAlignment, customBg, true, this.linesHostile, matrixStack);
+            RenderUtils.renderText(125, yOff, 1, colorFg, colorBg, hudAlignment, customBg, true, this.linesHostile, drawContext);
         }
     }
 

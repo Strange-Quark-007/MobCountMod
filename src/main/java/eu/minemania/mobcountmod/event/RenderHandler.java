@@ -4,7 +4,7 @@ import eu.minemania.mobcountmod.config.Configs;
 import eu.minemania.mobcountmod.render.MobCountRenderer;
 import fi.dy.masa.malilib.interfaces.IRenderer;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawContext;
 
 public class RenderHandler implements IRenderer
 {
@@ -16,13 +16,13 @@ public class RenderHandler implements IRenderer
     }
 
     @Override
-    public void onRenderGameOverlayPost(MatrixStack matrixStack)
+    public void onRenderGameOverlayPost(DrawContext drawContext)
     {
         MinecraftClient mc = MinecraftClient.getInstance();
 
         if (Configs.Generic.ENABLED.getBooleanValue() && mc.options.debugEnabled == false && mc.player != null)
         {
-            MobCountRenderer.renderOverlays(matrixStack);
+            MobCountRenderer.renderOverlays(drawContext);
         }
     }
 }
