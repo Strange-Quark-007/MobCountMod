@@ -287,6 +287,10 @@ public class MobCountRenderer
         {
             this.addLinePassive(lineTextP(EntityType.IRON_GOLEM));
         }
+        else if (type == InfoTogglePassive.ITEM)
+        {
+            this.addLinePassive(lineTextP(EntityType.ITEM));
+        }
         else if (type == InfoTogglePassive.LLAMA)
         {
             this.addLinePassive(lineTextP(EntityType.LLAMA));

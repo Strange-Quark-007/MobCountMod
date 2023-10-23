@@ -20,7 +20,7 @@ public class RenderHandler implements IRenderer
     {
         MinecraftClient mc = MinecraftClient.getInstance();
 
-        if (Configs.Generic.ENABLED.getBooleanValue() && mc.options.debugEnabled == false && mc.player != null)
+        if (Configs.Generic.ENABLED.getBooleanValue() && !mc.getDebugHud().shouldShowDebugHud() && mc.player != null)
         {
             MobCountRenderer.renderOverlays(drawContext);
         }

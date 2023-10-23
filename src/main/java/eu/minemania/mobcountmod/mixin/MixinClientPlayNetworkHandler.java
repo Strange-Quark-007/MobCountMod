@@ -2,20 +2,17 @@ package eu.minemania.mobcountmod.mixin;
 
 import com.mojang.brigadier.StringReader;
 import eu.minemania.mobcountmod.command.ClientCommandManager;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.client.util.telemetry.WorldSession;
+import net.minecraft.client.network.ClientConnectionState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
 
 import eu.minemania.mobcountmod.command.Command;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.CommandTreeS2CPacket;
 import net.minecraft.network.ClientConnection;
@@ -29,7 +26,7 @@ public abstract class MixinClientPlayNetworkHandler
 
     @SuppressWarnings("unchecked")
     @Inject(method = "<init>", at = @At("RETURN"))
-    public void onInitMCM(MinecraftClient client, Screen screen, ClientConnection connection, ServerInfo serverInfo, GameProfile profile, WorldSession worldSession, CallbackInfo ci)
+    public void onInitMCM(MinecraftClient client, ClientConnection clientConnection, ClientConnectionState clientConnectionState, CallbackInfo ci)
     {
         Command.registerCommands((CommandDispatcher<ServerCommandSource>) (Object) commandDispatcher);
     }
