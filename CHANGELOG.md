@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.5+1.20.2] - 2024-04-10
+
+### Added
+
+- Display killed entities
+
 ## [1.9.4+1.20.2] - 2023-10-23
 
 ### Added

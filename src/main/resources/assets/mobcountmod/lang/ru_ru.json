@@ -5,6 +5,7 @@
   "mcm.description.config.count_passive": "Количество за дружелюбных мобов, прежде чем слишком много сущностей",
   "mcm.description.config.custom_bg_color": "Устанавливает собственный цвет фона",
   "mcm.description.config.display_all": "Показывает всех мобов сразу мобов",
+  "mcm.description.config.display_amount_killed": "Отображение количества убитых",
   "mcm.description.config.enabled": "Включает мода MobCountMod по полностью",
   "mcm.description.config.hudalignment": "Устанавливает выравнивание HUD",
   "mcm.description.config.infotoggle": "Показывает количество мобов %s",
@@ -15,6 +16,7 @@
   "mcm.description.config.soundfile": "Файл звука",
   "mcm.description.config.xp5": "Если выключено, использует нормальный радиус для счетика мобов",
   "mcm.description.hotkey.both": "Переключает оба счетчика",
+  "mcm.description.hotkey.empty_mobcounts": "Пустые счетчики убитых",
   "mcm.description.hotkey.passive": "Переключить счетика для дружелюбных мобов",
   "mcm.description.hotkey.hostile": "Переключить счетика для враждебных мобов",
   "mcm.description.hotkey.open_gui_settings": "Открыть Конфиг графического интерфейса",
@@ -43,6 +45,8 @@
   "mcm.message.command.xp5.shocker": "Теперь считая только мобов в ShockerzXP5 очки убийства... в основном.",
   "mcm.message.mobcounter.radius": "Радиус: %d",
   "mcm.message.mobcounter.total": "Всего: %d",
+  "mcm.message.mobcounter.total_killed": "Всего убито: %d",
+  "mcm.message.mobcounter.killed": "Убит: %sx",
   "mcm.message.setting.off": "выключено",
   "mcm.message.setting.on": "включено"
 }

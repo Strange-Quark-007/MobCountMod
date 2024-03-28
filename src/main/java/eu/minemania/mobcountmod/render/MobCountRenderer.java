@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import eu.minemania.mobcountmod.MobCountMod;
 import eu.minemania.mobcountmod.config.Configs;
 import eu.minemania.mobcountmod.config.InfoToggleHostile;
 import eu.minemania.mobcountmod.config.InfoTogglePassive;
@@ -16,7 +17,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 
 public class MobCountRenderer
@@ -24,6 +24,8 @@ public class MobCountRenderer
     private static final MobCountRenderer INSTANCE = new MobCountRenderer();
     private int totalPassive = 0;
     private int totalHostile = 0;
+    private int totalKilledPassive = 0;
+    private int totalKilledHostile = 0;
     private long infoUpdateTime;
     private final List<StringHolder> lineWrappersHostile = new ArrayList<>();
     private final List<StringHolder> lineWrappersPassive = new ArrayList<>();
@@ -90,6 +92,8 @@ public class MobCountRenderer
         this.lineWrappersPassive.clear();
         this.totalHostile = 0;
         this.totalPassive = 0;
+        this.totalKilledHostile = 0;
+        this.totalKilledPassive = 0;
 
         List<LinePosPassive> positionsPassive = new ArrayList<>();
         List<LinePosHostile> positionsHostile = new ArrayList<>();
@@ -123,6 +127,7 @@ public class MobCountRenderer
             catch (Exception e)
             {
                 this.addLinePassive(pos.type.getName() + ": exception");
+                MobCountMod.logger.error(e.getMessage());
             }
         }
 
@@ -135,6 +140,7 @@ public class MobCountRenderer
             catch (Exception e)
             {
                 this.addLineHostile(pos.type.getName() + ": exception");
+                MobCountMod.logger.error(e.getMessage());
             }
         }
 
@@ -194,15 +200,9 @@ public class MobCountRenderer
         MinecraftClient mc = MinecraftClient.getInstance();
         int size = mc.world.getEntitiesByType(entity, DataManager.getCounter().getPassiveBB(), EntityPredicates.EXCEPT_SPECTATOR).size() - (!StringUtils.translate(entity.getTranslationKey()).equals("Player") ? 0 : (mc.player.isSpectator() ? 0 : 1));
         totalPassive += size;
-        return size == 0 && !Configs.Generic.DISPLAY_ALL.getBooleanValue() ? "" : String.format("%s: %s%d%s", StringUtils.translate(entity.getTranslationKey()), size > Configs.Generic.COUNT_PASSIVE.getIntegerValue() ? GuiBase.TXT_RED : GuiBase.TXT_GREEN, size, GuiBase.TXT_RST);
-    }
-
-    private <T extends Entity> String lineText(Class<? extends T> entity)
-    {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        int size = mc.world.getEntitiesByClass(entity, DataManager.getCounter().getPassiveBB(), EntityPredicates.EXCEPT_SPECTATOR).size();
-        totalPassive += size;
-        return size == 0 && !Configs.Generic.DISPLAY_ALL.getBooleanValue() ? "" : String.format("%s: %s%d%s", StringUtils.translate(EntityType.TROPICAL_FISH.getTranslationKey()), size > Configs.Generic.COUNT_PASSIVE.getIntegerValue() ? GuiBase.TXT_RED : GuiBase.TXT_GREEN, size, GuiBase.TXT_RST);
+        int passiveKilled = DataManager.getEntityCount(entity);
+        totalKilledPassive += passiveKilled;
+        return size == 0 && !Configs.Generic.DISPLAY_ALL.getBooleanValue() ? "" : String.format("%s: %s%d%s%s", StringUtils.translate(entity.getTranslationKey()), size > Configs.Generic.COUNT_PASSIVE.getIntegerValue() ? GuiBase.TXT_RED : GuiBase.TXT_GREEN, size, GuiBase.TXT_RST, Configs.Generic.DISPLAY_AMOUNT_KILLED.getBooleanValue() ? " " + StringUtils.translate("mcm.message.mobcounter.killed", passiveKilled) : "");
     }
 
     private <T extends Entity> String lineTextH(EntityType<T> entity)
@@ -210,14 +210,16 @@ public class MobCountRenderer
         MinecraftClient mc = MinecraftClient.getInstance();
         int size = mc.world.getEntitiesByType(entity, DataManager.getCounter().getHostileBB(), EntityPredicates.EXCEPT_SPECTATOR).size();
         totalHostile += size;
-        return size == 0 && !Configs.Generic.DISPLAY_ALL.getBooleanValue() ? "" : String.format("%s: %s%d%s", StringUtils.translate(entity.getTranslationKey()), size > Configs.Generic.COUNT_HOSTILE.getIntegerValue() ? GuiBase.TXT_RED : GuiBase.TXT_GREEN, size, GuiBase.TXT_RST);
+        int hostileKilled = DataManager.getEntityCount(entity);
+        totalKilledHostile += hostileKilled;
+        return size == 0 && !Configs.Generic.DISPLAY_ALL.getBooleanValue() ? "" : String.format("%s: %s%d%s%s", StringUtils.translate(entity.getTranslationKey()), size > Configs.Generic.COUNT_HOSTILE.getIntegerValue() ? GuiBase.TXT_RED : GuiBase.TXT_GREEN, size, GuiBase.TXT_RST, Configs.Generic.DISPLAY_AMOUNT_KILLED.getBooleanValue() ? " " + StringUtils.translate("mcm.message.mobcounter.killed", hostileKilled) : "");
     }
 
     private void addLinePassive(InfoTogglePassive type)
     {
         if (type == InfoTogglePassive.RADIUS_COUNTER)
         {
-            this.addLinePassive(String.format("%s %s%s%s", StringUtils.translate("mcm.message.mobcounter.radius", DataManager.getCounter().getRadiusP()), getColor(totalPassive, true), StringUtils.translate("mcm.message.mobcounter.total", this.totalPassive), GuiBase.TXT_RST));
+            this.addLinePassive(String.format("%s %s%s%s%s", StringUtils.translate("mcm.message.mobcounter.radius", DataManager.getCounter().getRadiusP()), getColor(totalPassive, true), StringUtils.translate("mcm.message.mobcounter.total", this.totalPassive), GuiBase.TXT_RST, Configs.Generic.DISPLAY_AMOUNT_KILLED.getBooleanValue() ? " " + StringUtils.translate("mcm.message.mobcounter.total_killed", this.totalKilledPassive) : ""));
         }
         else if (type == InfoTogglePassive.ALLAY)
         {
@@ -261,7 +263,7 @@ public class MobCountRenderer
         }
         else if (type == InfoTogglePassive.FISH)
         {
-            this.addLinePassive(lineText(FishEntity.class));
+            this.addLinePassive(lineTextP(EntityType.TROPICAL_FISH));
         }
         else if (type == InfoTogglePassive.FOX)
         {
@@ -389,7 +391,7 @@ public class MobCountRenderer
     {
         if (type == InfoToggleHostile.RADIUS_COUNTER)
         {
-            this.addLineHostile(String.format("%s %s%s%s", StringUtils.translate("mcm.message.mobcounter.radius", DataManager.getCounter().getRadiusH()), getColor(totalHostile, false), StringUtils.translate("mcm.message.mobcounter.total", this.totalHostile), GuiBase.TXT_RST));
+            this.addLineHostile(String.format("%s %s%s%s%s", StringUtils.translate("mcm.message.mobcounter.radius", DataManager.getCounter().getRadiusH()), getColor(totalHostile, false), StringUtils.translate("mcm.message.mobcounter.total", this.totalHostile), GuiBase.TXT_RST, Configs.Generic.DISPLAY_AMOUNT_KILLED.getBooleanValue() ? " " + StringUtils.translate("mcm.message.mobcounter.total_killed", this.totalKilledHostile) : ""));
         }
         else if (type == InfoToggleHostile.BLAZE)
         {
