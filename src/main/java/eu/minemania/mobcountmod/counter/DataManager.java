@@ -1,6 +1,7 @@
 package eu.minemania.mobcountmod.counter;
 
 import java.io.File;
+import java.util.HashMap;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -17,6 +18,8 @@ import fi.dy.masa.malilib.util.WorldUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
@@ -32,6 +35,7 @@ public class DataManager
     private int hostileVisible = 0;
     private int playSoundCount = 0; // counts up so sound plays once per sec
     private int sendMsgCount = 0; // counts up so message sends every 5 minutes
+    private HashMap<EntityType<?>, Integer> entities = new HashMap<>();
 
     public static DataManager getInstance()
     {
@@ -229,5 +233,20 @@ public class DataManager
     public static File getCurrentConfigDirectory()
     {
         return new File(FileUtils.getConfigDirectory(), Reference.MOD_ID);
+    }
+
+    public static <T extends Entity> Integer getEntityCount(EntityType<T> entity)
+    {
+        return INSTANCE.entities.getOrDefault(entity, 0);
+    }
+
+    public static <T extends Entity> void addEntityCount(EntityType<T> entity)
+    {
+        INSTANCE.entities.compute(entity, (key, count) -> count == null ? 1 : count + 1);
+    }
+
+    public static void resetEntityCount()
+    {
+        INSTANCE.entities.clear();
     }
 }

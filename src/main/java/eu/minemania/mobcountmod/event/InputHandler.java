@@ -115,6 +115,10 @@ public class InputHandler implements IKeybindProvider, IKeyboardInputHandler, IM
                         DataManager.resetVisibleHostile();
                     }
                 }
+                if (Hotkeys.EMPTY_MOBCOUNTS.getKeybind().isKeybindHeld())
+                {
+                    DataManager.resetEntityCount();
+                }
             }
         }
         return false;

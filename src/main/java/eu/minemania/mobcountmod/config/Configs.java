@@ -42,6 +42,7 @@ public class Configs implements IConfigHandler
         public static final ConfigInteger RADIUS_PASSIVE = new ConfigInteger("radiusPassive", 16, "mcm.description.config.radius_passive");
         public static final ConfigString SOUNDFILE = new ConfigString("soundFile", "block.note_block.bass", "mcm.description.config.soundfile");
         public static final ConfigBoolean XP5 = new ConfigBoolean("xp5", false, "mcm.description.config.xp5");
+        public static final ConfigBoolean DISPLAY_AMOUNT_KILLED = new ConfigBoolean("displayAmountKilled", false, "mcm.description.config.display_amount_killed");
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 COLOR_BACK_DEFAULT,
@@ -50,6 +51,7 @@ public class Configs implements IConfigHandler
                 COUNT_PASSIVE,
                 CUSTOM_BG_COLOR,
                 DISPLAY_ALL,
+                DISPLAY_AMOUNT_KILLED,
                 ENABLED,
                 HUD_ALIGNMENT,
                 MESSAGE_LIST,

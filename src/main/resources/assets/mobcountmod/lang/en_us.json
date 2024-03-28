@@ -5,6 +5,7 @@
   "mcm.description.config.count_passive": "Amount per passive mob before too much entities",
   "mcm.description.config.custom_bg_color": "Sets a custom background color",
   "mcm.description.config.display_all": "Displays all entities at once",
+  "mcm.description.config.display_amount_killed": "Display amount killed",
   "mcm.description.config.enabled": "Enables MobCountMod fully",
   "mcm.description.config.hudalignment": "Sets the alignment of the hud",
   "mcm.description.config.infotoggle": "Show the amount of %s",
@@ -15,6 +16,7 @@
   "mcm.description.config.soundfile": "Sound file",
   "mcm.description.config.xp5": "When disabled, uses normal mob counter radius",
   "mcm.description.hotkey.both": "Toggles both counters",
+  "mcm.description.hotkey.empty_mobcounts": "Empty killed counters",
   "mcm.description.hotkey.passive": "Toggle Passive Counter",
   "mcm.description.hotkey.hostile": "Toggle Hostile Counter",
   "mcm.description.hotkey.open_gui_settings": "Open the Config GUI",
@@ -43,6 +45,8 @@
   "mcm.message.command.xp5.shocker": "Now counting only mobs at ShockerzXP5 kill points... mostly.",
   "mcm.message.mobcounter.radius": "Radius: %d",
   "mcm.message.mobcounter.total": "Total: %d",
+  "mcm.message.mobcounter.total_killed": "Total killed: %d",
+  "mcm.message.mobcounter.killed": "Killed: %sx",
   "mcm.message.setting.off": "off",
   "mcm.message.setting.on": "on"
 }
