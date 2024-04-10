@@ -36,10 +36,6 @@ public abstract class MixinClientPlayNetworkHandler
     @Shadow
     private CommandDispatcher<ServerCommandSource> commandDispatcher;
 
-    @Shadow protected abstract ParseResults<CommandSource> parse(String command);
-
-    @Shadow protected abstract void loadChunk(int x, int z, ChunkData chunkData);
-
     @SuppressWarnings("unchecked")
     @Inject(method = "<init>", at = @At("RETURN"))
     public void onInitMCM(MinecraftClient client, ClientConnection clientConnection, ClientConnectionState clientConnectionState, CallbackInfo ci)
