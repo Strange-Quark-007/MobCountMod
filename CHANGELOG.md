@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.6+1.20.4] - 2024-04-19
+
+### Added
+
+- Support Minecraft 1.20.4
+- Added Breeze support
+
 ## [1.9.5+1.20.2] - 2024-04-10
 
 ### Added

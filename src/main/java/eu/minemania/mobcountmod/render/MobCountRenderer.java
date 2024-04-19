@@ -397,6 +397,10 @@ public class MobCountRenderer
         {
             this.addLineHostile(lineTextH(EntityType.BLAZE));
         }
+        else if (type == InfoToggleHostile.BREEZE)
+        {
+            this.addLineHostile(lineTextH(EntityType.BREEZE));
+        }
         else if (type == InfoToggleHostile.CAVE_SPIDER)
         {
             this.addLineHostile(lineTextH(EntityType.CAVE_SPIDER));
