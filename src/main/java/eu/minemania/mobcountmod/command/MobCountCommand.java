@@ -7,6 +7,7 @@ import com.mojang.brigadier.tree.CommandNode;
 
 import eu.minemania.mobcountmod.Reference;
 import eu.minemania.mobcountmod.config.Configs;
+import eu.minemania.mobcountmod.counter.DataManager;
 import fi.dy.masa.malilib.util.StringUtils;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -43,7 +44,10 @@ public class MobCountCommand extends MobCountCommandBase
                 .then(literal("faction").executes(MobCountCommand::faction)
                         .then(argument("on", bool()).executes(MobCountCommand::faction)))
                 .then(literal("xp5").executes(MobCountCommand::xp5)
-                        .then(argument("on", bool()).executes(MobCountCommand::xp5)));
+                        .then(argument("on", bool()).executes(MobCountCommand::xp5)))
+                .then(literal("killed")
+                        .then(literal("save").executes(MobCountCommand::killed_save))
+                        .then(literal("clear").executes(MobCountCommand::killed_clear)));
         dispatcher.register(counter);
     }
 
@@ -188,5 +192,18 @@ public class MobCountCommand extends MobCountCommandBase
             }
         }
         return cmdCount;
+    }
+
+    private static int killed_clear(CommandContext<ServerCommandSource> context)
+    {
+        DataManager.resetEntityCount();
+        localOutputT(context.getSource(), "mcm.message.command.killed.reset");
+        return 1;
+    }
+
+    private static int killed_save(CommandContext<ServerCommandSource> context)
+    {
+        DataManager.saveKilledFile(context.getSource());
+        return 1;
     }
 }

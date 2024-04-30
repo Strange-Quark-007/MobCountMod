@@ -1,6 +1,8 @@
 package eu.minemania.mobcountmod.counter;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import com.google.gson.JsonElement;
@@ -9,6 +11,7 @@ import com.google.gson.JsonPrimitive;
 
 import eu.minemania.mobcountmod.MobCountMod;
 import eu.minemania.mobcountmod.Reference;
+import eu.minemania.mobcountmod.command.MobCountCommand;
 import eu.minemania.mobcountmod.config.Configs;
 import eu.minemania.mobcountmod.gui.GuiConfigs.ConfigGuiTab;
 import fi.dy.masa.malilib.util.FileUtils;
@@ -20,6 +23,8 @@ import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
@@ -248,5 +253,37 @@ public class DataManager
     public static void resetEntityCount()
     {
         INSTANCE.entities.clear();
+    }
+
+    public static File getMobCounterModBaseDirectory()
+    {
+        File dir = FileUtils.getCanonicalFileIfPossible(new File(FileUtils.getMinecraftDirectory(), "mobcountermod"));
+
+        if (!dir.exists() && !dir.mkdirs())
+        {
+            MobCountMod.logger.warn("Failed to create the mobcountermod directory '{}'", dir.getAbsolutePath());
+        }
+
+        return dir;
+    }
+
+    public static void saveKilledFile(ServerCommandSource serverCommandSource)
+    {
+        PlayerEntity playerEntity = MinecraftClient.getInstance().player;
+        Calendar calendar = Calendar.getInstance();
+        String fileName = String.format("%4d-%02d-%02d-%02d.%02d.%02d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
+
+        File file = new File(getMobCounterModBaseDirectory(), fileName + ".txt");
+        try
+        {
+            getCounter().save(file);
+            StringUtils.sendOpenFileChatMessage(playerEntity, "%s", file);
+            MobCountCommand.localOutputT(serverCommandSource, "mcm.message.killed.saved", fileName);
+        }
+        catch (IOException e)
+        {
+            MobCountMod.logger.error("error saving killed mob count to " + file, e);
+            MobCountCommand.localErrorT(serverCommandSource, "mcm.message.killed.not_saved", fileName);
+        }
     }
 }

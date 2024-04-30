@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.5+1.20.1] - 2024-05-02
+
+### Added
+
+- Support to save entity kills counts to a file
+
 ## [1.9.4+1.20.1] - 2024-03-28
 
 ### Added
