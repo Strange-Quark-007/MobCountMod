@@ -16,7 +16,8 @@ public enum InfoTogglePassive implements IConfigInteger, IHotkeyTogglable
 {
     RADIUS_COUNTER("infoRadiusCounter", true, 99, "", "radius counter"),
     ALLAY("infoAllay", true, 38, "", "allays"),
-    AXOLOTL("infoAxolotl", true, 33, "", "axolotl"),
+    ARMADILLO("infoArmadillo", true, 42, "", "armadillos"),
+    AXOLOTL("infoAxolotl", true, 33, "", "axolotls"),
     BAT("infoBat", true, 10, "", "bats"),
     BEE("infoBee", true, 23, "", "bees"),
     CAMEL("infoCamel", true, 39, "", "camels"),

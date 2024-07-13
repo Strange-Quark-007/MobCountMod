@@ -164,6 +164,10 @@ public class MobCounter
         {
             return EntityType.ALLAY;
         }
+        else if (type == InfoTogglePassive.ARMADILLO)
+        {
+            return EntityType.ARMADILLO;
+        }
         else if (type == InfoTogglePassive.AXOLOTL)
         {
             return EntityType.AXOLOTL;
@@ -333,6 +337,10 @@ public class MobCounter
         if (type == InfoToggleHostile.BLAZE)
         {
             return EntityType.BLAZE;
+        }
+        else if (type == InfoToggleHostile.BOGGED)
+        {
+            return EntityType.BOGGED;
         }
         else if (type == InfoToggleHostile.BREEZE)
         {

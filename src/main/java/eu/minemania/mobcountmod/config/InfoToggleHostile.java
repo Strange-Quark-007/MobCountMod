@@ -16,6 +16,7 @@ public enum InfoToggleHostile implements IConfigInteger, IHotkeyTogglable
 {
     RADIUS_COUNTER("infoRadiusCounter", true, 99, "", "radius counter"),
     BLAZE("infoBlaze", true, 13, "", "blazes"),
+    BOGGED("infoBogged", true, 36, "", "boggeds"),
     BREEZE("infoBreeze", true, 35, "", "breezes"),
     CAVE_SPIDER("infoCaveSpider", true, 18, "", "cave spiders"),
     CREEPER("infoCreeper", true, 3, "", "creepers"),
