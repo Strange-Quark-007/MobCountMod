@@ -116,7 +116,7 @@ public class DataManager
         {
             if (this.playSoundCount == 0)
             {
-                SoundEvent soundEvent = Registries.SOUND_EVENT.get(new Identifier(Configs.Generic.SOUNDFILE.getStringValue()));
+                SoundEvent soundEvent = Registries.SOUND_EVENT.get(Identifier.of(Configs.Generic.SOUNDFILE.getStringValue()));
                 if (soundEvent != null)
                 {
                     SoundInstance sound = PositionedSoundInstance.master(soundEvent, 1.0F);
